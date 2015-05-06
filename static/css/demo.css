@@ -1,0 +1,26 @@
+body{
+    margin: 0;
+}
+.wrap-page{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: #000;
+}
+.page{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+}
+.page img{
+    width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
