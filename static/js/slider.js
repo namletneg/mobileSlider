@@ -18,18 +18,24 @@
                 i, len, m,
                 handlerStart = function(event){
                     self.startX = event.targetTouches[0].pageX;
+                    self.startY = event.targetTouches[0].pageY;
                     self.offsetX = 0;
                     self.startTime = new Date();
                 },
                 handlerMove = function(event){
                     event.preventDefault();
                     self.moveX = event.targetTouches[0].pageX;
+                    self.moveY = event.targetTouches[0].pageY;
                     self.offsetX = self.moveX - self.startX;
 
-                    for(i = self.idx - 1, m = i + 3; i < m; i++){
-                        item[i] && (item[i].style.transform = 'translate3d(' + (scale * (i - self.idx) + self.offsetX) + 'px, 0, 0)') &&
-                        ((item[i].style.webkitTransform = 'translate3d(' + (scale * (i - self.idx) + self.offsetX) + 'px, 0, 0)')) &&
-                        (item[i].style.transition = 'none');
+                    // 滑动倾斜度小于45度
+                    if(Math.abs(self.moveY - self.startY) < Math.abs(self.moveX - self.startX)){
+                        event.preventDefault();
+                        for (i = self.idx - 1, m = i + 3; i < m; i++) {
+                            item[i] && (item[i].style.transform = 'translate3d(' + (scale * (i - self.idx) + self.offsetX) + 'px, 0, 0)') &&
+                            ((item[i].style.webkitTransform = 'translate3d(' + (scale * (i - self.idx) + self.offsetX) + 'px, 0, 0)')) &&
+                            (item[i].style.transition = 'none');
+                        }
                     }
                 },
                 handlerUp = function(){
